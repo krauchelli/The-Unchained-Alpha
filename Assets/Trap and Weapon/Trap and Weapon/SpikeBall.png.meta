@@ -103,12 +103,12 @@ TextureImporter:
       name: SpikeBall_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 21
         y: 0
-        width: 42
+        width: 21
         height: 21
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 05b1d01e4e0d7c749adc4317c033c920
     internalID: 0
     vertices: []
     indices: 
@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      SpikeBall_0: 447856426745747066
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
