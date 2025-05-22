@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2945631617454748708}
   - component: {fileID: 3632070496640757727}
   - component: {fileID: 7561229395972671813}
+  - component: {fileID: 2882895651608915612}
   m_Layer: 6
   m_Name: Player_king
   m_TagString: Untagged
@@ -223,3 +224,15 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.47}
   m_Size: {x: 0.37, y: 0.18}
   m_Direction: 1
+--- !u!114 &2882895651608915612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7456073097173135670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e253235038329b40a0558ca6074c33e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
