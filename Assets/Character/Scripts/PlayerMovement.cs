@@ -26,11 +26,12 @@ public class PlayerMovement : MonoBehaviour
 
         FlipSprite();
 
-        if(Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
             isGrounded = false;
             animator.SetBool("isJumping", !isGrounded);
+            animator.SetBool("isFalling", !isGrounded && rb.linearVelocity.y < 0);
         }
     }
 
