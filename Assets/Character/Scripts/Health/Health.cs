@@ -3,7 +3,7 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField] private float startingHealth;
-    private float currentHealth;
+    public float currentHealth { get; private set; } // tujuannya adalah untuk mengakses currentHealth dari luar kelas ini, tapi tidak bisa mengubahnya dari luar kelas ini
 
     private void Awake()
     {
@@ -21,6 +21,16 @@ public class Health : MonoBehaviour
         else
         {
             // player dead
+        }
+    }
+
+    //sample tes untuk mengurangi health
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            TakeDamage(1);
+            Debug.Log("Current Health: " + currentHealth);
         }
     }
 }
