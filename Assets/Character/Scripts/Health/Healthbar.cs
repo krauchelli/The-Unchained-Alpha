@@ -1,22 +1,29 @@
 using UnityEngine;
 using UnityEngine.UI;
-// This script manages the health bar UI for the player character, updating the current health bar based on the player's health status.
 
 public class Healthbar : MonoBehaviour
 {
+    [Header("Health References")]
     [SerializeField] private Health playerHealth;
     [SerializeField] private Image totalHealthBar;
     [SerializeField] private Image currentHealthBar;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [Header("Player Identification")]
+    [SerializeField] private int playerNumber = 1; // 1 for Player 1, 2 for Player 2
+
     void Start()
     {
-        totalHealthBar.fillAmount = playerHealth.currentHealth / 10;
+        if (playerHealth != null)
+        {
+            totalHealthBar.fillAmount = playerHealth.currentHealth / 10;
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        currentHealthBar.fillAmount = playerHealth.currentHealth / 10;
+        if (playerHealth != null)
+        {
+            currentHealthBar.fillAmount = playerHealth.currentHealth / 10;
+        }
     }
 }
