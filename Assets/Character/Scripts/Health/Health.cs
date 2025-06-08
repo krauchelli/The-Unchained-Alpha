@@ -3,14 +3,18 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField] private float startingHealth;
-    public float currentHealth { get; private set; } // tujuannya adalah untuk mengakses currentHealth dari luar kelas ini, tapi tidak bisa mengubahnya dari luar kelas ini
+    public float currentHealth { get; private set; }
     private Animator anim;
     private bool isDead;
+    
+    // Add player identification
+    private PlayerMovement playerMovement;
 
     private void Awake()
     {
         currentHealth = startingHealth;
         anim = GetComponent<Animator>();
+        playerMovement = GetComponent<PlayerMovement>(); // Get player number
     }
 
     public void TakeDamage(float _damage)
@@ -19,7 +23,6 @@ public class Health : MonoBehaviour
 
         if (currentHealth > 0)
         {
-            // player hurt
             anim.SetTrigger("hurt");
         }
         else
@@ -27,21 +30,28 @@ public class Health : MonoBehaviour
             if (!isDead)
             {
                 anim.SetTrigger("die");
-                // Disable the character controller or any other components that should not be active when dead
-                GetComponent<PlayerMovement>().enabled = false; // Assuming you have a CharacterController2D component
-                // player dead
+                GetComponent<PlayerMovement>().enabled = false;
                 isDead = true;
             }
         }
     }
 
-    //sample tes untuk mengurangi health
+    // Remove the test input or make it player-specific
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        // Player 1: E key, Player 2: Period key for testing
+        if (playerMovement != null)
         {
-            TakeDamage(1);
-            Debug.Log("Current Health: " + currentHealth);
+            if (playerMovement.playerNumber == 1 && Input.GetKeyDown(KeyCode.E))
+            {
+                TakeDamage(1);
+                Debug.Log("Player 1 Health: " + currentHealth);
+            }
+            else if (playerMovement.playerNumber == 2 && Input.GetKeyDown(KeyCode.Period))
+            {
+                TakeDamage(1);
+                Debug.Log("Player 2 Health: " + currentHealth);
+            }
         }
     }
 }
