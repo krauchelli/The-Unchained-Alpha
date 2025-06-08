@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: 3632070496640757727}
   - component: {fileID: 7561229395972671813}
   - component: {fileID: 2882895651608915612}
+  - component: {fileID: 5402912825766746559}
   m_Layer: 6
   m_Name: Player_king
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,8 +79,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1226051687
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 4723107735738678597, guid: 0e3502a80399d164ea01f1868f65acbf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -236,3 +237,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e253235038329b40a0558ca6074c33e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerNumber: 1
+--- !u!114 &5402912825766746559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7456073097173135670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9b94d0ffafbf8541b29726383e92385, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 5

@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Player Settings")]
-    [SerializeField] int playerNumber = 1; // 1 for Player 1, 2 for Player 2
+    [SerializeField] public int playerNumber = 1; // 1 for Player 1, 2 for Player 2
     
     float horizontalInput;
     float moveSpeed = 5f;
