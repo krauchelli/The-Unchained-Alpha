@@ -16594,6 +16594,10 @@ PrefabInstance:
       value: Attack_P2
       objectReference: {fileID: 0}
     - target: {fileID: 2882895651608915612, guid: 642d988d803b1c241bd750401dafd501, type: 3}
+      propertyPath: playerNumber
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882895651608915612, guid: 642d988d803b1c241bd750401dafd501, type: 3}
       propertyPath: horizontalAxis
       value: Horizontal_P2
       objectReference: {fileID: 0}
