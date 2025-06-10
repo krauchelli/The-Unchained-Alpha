@@ -17,6 +17,17 @@ public class LeverController : MonoBehaviour
     void Awake()
     {
         animator = GetComponent<Animator>();
+        
+        // Add null checks
+        if (animator == null)
+        {
+            Debug.LogError($"No Animator component found on {gameObject.name}! Lever requires an Animator component.", this);
+        }
+        
+        if (doorToToggle == null)
+        {
+            Debug.LogWarning($"No door assigned to {gameObject.name}! Please assign a SpearDoor in the inspector.", this);
+        }
     }
     
     void Update()
@@ -37,22 +48,34 @@ public class LeverController : MonoBehaviour
     private void ToggleLever()
     {
         isActivated = !isActivated;
+        Debug.Log($"Lever {gameObject.name} toggled. Activated: {isActivated}");
 
-        if (isActivated)
+        if (animator != null)
         {
-            animator.SetTrigger("LeverOn");
-            if (doorToToggle != null)
+            if (isActivated)
+            {
+                animator.SetTrigger("LeverOn");
+            }
+            else
+            {
+                animator.SetTrigger("LeverOff");
+            }
+        }
+
+        if (doorToToggle != null)
+        {
+            if (isActivated)
             {
                 doorToToggle.Open();
+            }
+            else
+            {
+                doorToToggle.Close();
             }
         }
         else
         {
-            animator.SetTrigger("LeverOff");
-            if (doorToToggle != null)
-            {
-                doorToToggle.Close();
-            }
+            Debug.LogWarning($"No door assigned to lever {gameObject.name}!");
         }
     }
     
@@ -60,17 +83,18 @@ public class LeverController : MonoBehaviour
     {
         if (other.CompareTag(playerTag))
         {
-            // Check which player entered based on their PlayerMovement component
             PlayerMovement playerMovement = other.GetComponent<PlayerMovement>();
             if (playerMovement != null)
             {
                 if (playerMovement.playerNumber == 1)
                 {
                     player1IsNearby = true;
+                    Debug.Log($"Player 1 near lever {gameObject.name}");
                 }
                 else if (playerMovement.playerNumber == 2)
                 {
                     player2IsNearby = true;
+                    Debug.Log($"Player 2 near lever {gameObject.name}");
                 }
             }
         }
@@ -86,10 +110,12 @@ public class LeverController : MonoBehaviour
                 if (playerMovement.playerNumber == 1)
                 {
                     player1IsNearby = false;
+                    Debug.Log($"Player 1 left lever {gameObject.name}");
                 }
                 else if (playerMovement.playerNumber == 2)
                 {
                     player2IsNearby = false;
+                    Debug.Log($"Player 2 left lever {gameObject.name}");
                 }
             }
         }
