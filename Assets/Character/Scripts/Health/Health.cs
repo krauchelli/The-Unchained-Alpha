@@ -4,9 +4,11 @@ public class Health : MonoBehaviour
 {
     [SerializeField] private float startingHealth;
     public float currentHealth { get; private set; }
+    public GameOverScreen gameOverScreen;
+    public PlayerMovement secondPlayerMovement;
     private Animator anim;
     private bool isDead;
-    
+
     // Add player identification
     private PlayerMovement playerMovement;
 
@@ -31,7 +33,9 @@ public class Health : MonoBehaviour
             {
                 anim.SetTrigger("die");
                 GetComponent<PlayerMovement>().enabled = false;
+                secondPlayerMovement.enabled = false;
                 isDead = true;
+                gameOverScreen.setup();
             }
         }
     }
