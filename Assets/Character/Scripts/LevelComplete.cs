@@ -1,28 +1,31 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LevelComplete : MonoBehaviour
 {
     [Header("Level Settings")]
-    [SerializeField] private string nextSceneName = "NextLevel";
-    [SerializeField] private int nextSceneIndex = -1; // Use -1 to use scene name instead
-    
+    [SerializeField] private GameObject endingStory;
+    [SerializeField] private GameObject VictoryScreen;
+
     [Header("Player Completion")]
     [SerializeField] private bool player1Complete = false;
     [SerializeField] private bool player2Complete = false;
-    
+
     [Header("Debug")]
     [SerializeField] private bool showDebugLogs = true;
-    
+    private bool levelCompleted = false;
+    public PlayerMovement player1;
+    public PlayerMovement player2;
+
     private void Update()
     {
         // Check if both players have completed the level
-        if (player1Complete && player2Complete)
+        if (!levelCompleted && player1Complete && player2Complete)
         {
+            levelCompleted = true;
             CompleteLevel();
         }
     }
-    
+
     public void SetPlayerComplete(int playerNumber)
     {
         if (playerNumber == 1)
@@ -35,13 +38,13 @@ public class LevelComplete : MonoBehaviour
             player2Complete = true;
             if (showDebugLogs) Debug.Log("Player 2 reached the end!");
         }
-        
-        if (showDebugLogs) 
+
+        if (showDebugLogs)
         {
             Debug.Log($"Level Progress - P1: {player1Complete}, P2: {player2Complete}");
         }
     }
-    
+
     public void SetPlayerIncomplete(int playerNumber)
     {
         if (playerNumber == 1)
@@ -55,42 +58,43 @@ public class LevelComplete : MonoBehaviour
             if (showDebugLogs) Debug.Log("Player 2 left the end zone!");
         }
     }
-    
+
     private void CompleteLevel()
     {
-        if (showDebugLogs) Debug.Log("Both players completed! Loading next level...");
-        
-        // Add a small delay before loading next scene (optional)
-        Invoke("LoadNextLevel", 1f);
+        player1.enabled = false;
+        player2.enabled = false;
+
+        ShowEndingStory();
+        Invoke("ShowVictoryScreen", 3f);
     }
-    
-    private void LoadNextLevel()
+
+    private void ShowVictoryScreen()
     {
-        if (nextSceneIndex >= 0)
+        if (VictoryScreen != null)
         {
-            SceneManager.LoadScene(nextSceneIndex);
-        }
-        else if (!string.IsNullOrEmpty(nextSceneName))
-        {
-            SceneManager.LoadScene(nextSceneName);
-        }
-        else
-        {
-            Debug.LogError("No next scene specified!");
+            endingStory.SetActive(false);
+            VictoryScreen.SetActive(true);
         }
     }
-    
-    // Public methods for external access
+
+    private void ShowEndingStory()
+    {
+        if (endingStory != null)
+        {
+            endingStory.SetActive(true);
+        }
+    }
+
     public bool IsLevelComplete()
     {
         return player1Complete && player2Complete;
     }
-    
+
     public bool IsPlayer1Complete()
     {
         return player1Complete;
     }
-    
+
     public bool IsPlayer2Complete()
     {
         return player2Complete;

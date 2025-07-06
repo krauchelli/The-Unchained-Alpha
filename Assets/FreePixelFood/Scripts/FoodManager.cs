@@ -5,7 +5,7 @@ public class FoodManager : MonoBehaviour
 {
     public static FoodManager instance;
 
-    private int foodCount;
+    public int FoodCount { get; private set; }
     [SerializeField] private TMP_Text foodCountText;
 
     private void Awake()
@@ -18,11 +18,11 @@ public class FoodManager : MonoBehaviour
 
     private void OnGUI()
     {
-        foodCountText.text = foodCount.ToString();
+        foodCountText.text = FoodCount.ToString();
     }
 
     public void ChangeFoodCount(int amount)
     {
-        foodCount += amount;
+        FoodCount += amount;
     }
 }

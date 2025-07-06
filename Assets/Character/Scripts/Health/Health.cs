@@ -11,12 +11,14 @@ public class Health : MonoBehaviour
 
     // Add player identification
     private PlayerMovement playerMovement;
+    private FoodManager foodManager;
 
     private void Awake()
     {
         currentHealth = startingHealth;
         anim = GetComponent<Animator>();
         playerMovement = GetComponent<PlayerMovement>(); // Get player number
+        foodManager = FoodManager.instance;
     }
 
     public void TakeDamage(float _damage)
@@ -33,28 +35,41 @@ public class Health : MonoBehaviour
             {
                 anim.SetTrigger("die");
                 GetComponent<PlayerMovement>().enabled = false;
-                secondPlayerMovement.enabled = false;
+                if (secondPlayerMovement != null)
+                {
+                    secondPlayerMovement.enabled = false;
+                }
                 isDead = true;
                 gameOverScreen.setup();
             }
         }
     }
 
-    // Remove the test input or make it player-specific
+    public void AddHealth(float _amount)
+    {
+        currentHealth = Mathf.Clamp(currentHealth + _amount, 0, startingHealth);
+    }
+
     private void Update()
     {
-        // Player 1: E key, Player 2: Period key for testing
-        if (playerMovement != null)
+        if (playerMovement == null) return;
+
+        if (playerMovement.playerNumber == 1 && Input.GetKeyDown(KeyCode.E))
         {
-            if (playerMovement.playerNumber == 1 && Input.GetKeyDown(KeyCode.E))
+            if (foodManager.FoodCount > 0 && currentHealth < startingHealth)
             {
-                TakeDamage(1);
-                Debug.Log("Player 1 Health: " + currentHealth);
+                AddHealth(1);
+                foodManager.ChangeFoodCount(-1);
+                Debug.Log("Player 1 menggunakan food. Darah saat ini: " + currentHealth);
             }
-            else if (playerMovement.playerNumber == 2 && Input.GetKeyDown(KeyCode.Period))
+        }
+        else if (playerMovement.playerNumber == 2 && Input.GetKeyDown(KeyCode.Period))
+        {
+            if (foodManager.FoodCount > 0 && currentHealth < startingHealth)
             {
-                TakeDamage(1);
-                Debug.Log("Player 2 Health: " + currentHealth);
+                AddHealth(1);
+                foodManager.ChangeFoodCount(-1);
+                Debug.Log("Player 2 menggunakan food. Darah saat ini: " + currentHealth);
             }
         }
     }
